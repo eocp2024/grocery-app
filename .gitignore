@@ -1,5 +1,5 @@
-node_modules/ 
-.env 
-__pycache__/ 
-.DS_Store 
-database.db 
+node_modules/
+__pycache__/
+*.pyc
+*.sqlite
+.env
