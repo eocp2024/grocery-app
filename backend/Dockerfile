@@ -7,9 +7,10 @@ WORKDIR /app
 # Copy only requirements first (to optimize Docker caching)
 COPY backend/requirements.txt .
 
-# Install pip & dependencies
+# Install dependencies, including Uvicorn
 RUN pip install --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+    && pip install --no-cache-dir -r requirements.txt \
+    && pip install uvicorn  # Ensure Uvicorn is installed
 
 # Copy the rest of the backend files
 COPY backend/ .
