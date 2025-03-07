@@ -1,7 +1,7 @@
-# Use an official Python image as the base
+# Use an official Python image
 FROM python:3.10
 
-# Set the working directory
+# Set the working directory inside the container
 WORKDIR /app
 
 # Install system dependencies
@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends python3 python3
 # Upgrade pip
 RUN pip install --upgrade pip
 
-# Copy and install dependencies
+# Copy requirements file and install dependencies
 COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
@@ -20,6 +20,6 @@ COPY backend/ .
 # Expose port 8000 for FastAPI
 EXPOSE 8000
 
-# Start the FastAPI server using python -m uvicorn (avoids path issues)
-CMD ["python3", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Start FastAPI using python -m uvicorn (avoids path issues)
+CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
