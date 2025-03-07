@@ -14,14 +14,12 @@ RUN pip install --upgrade pip
 COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Explicitly install Uvicorn
-RUN pip install uvicorn
-
-# Copy the rest of the application
+# Copy the rest of the backend files
 COPY backend/ .
 
 # Expose port 8000 for FastAPI
 EXPOSE 8000
 
-# Start the FastAPI server
+# Start the FastAPI server using python -m uvicorn (avoids path issues)
 CMD ["python3", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
