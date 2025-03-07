@@ -2,13 +2,20 @@
   "services": [
     {
       "name": "backend",
-      "buildCommand": "pip install -r backend/requirements.txt",
-      "startCommand": "uvicorn backend.main:app --host 0.0.0.0 --port $PORT"
+      "dockerfile": "backend/Dockerfile",
+      "envVars": {
+        "PORT": "8000",
+        "DATABASE_URL": "your_database_url",
+        "SECRET_KEY": "your_secret_key"
+      }
     },
     {
       "name": "frontend",
-      "buildCommand": "npm install --prefix frontend && npm run build --prefix frontend",
-      "startCommand": "npx serve -s frontend/build -l $PORT"
+      "dockerfile": "frontend/Dockerfile",
+      "envVars": {
+        "PORT": "3000",
+        "REACT_APP_API_BASE_URL": "https://your-railway-backend-url"
+      }
     }
   ]
 }
